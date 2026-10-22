@@ -2,4 +2,5 @@
 
 
 def calcular_total(precio_unitario: int, cantidad: int) -> int:
-    return 0
+    total = precio_unitario * cantidad
+    return total
