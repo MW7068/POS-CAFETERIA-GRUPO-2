@@ -1,0 +1,23 @@
+# Python y herramientas de calidad
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Configuración local y secretos
+.vscode/
+.idea/
+.env
+.env.*
+!.env.example
+
+# Datos locales y archivos del sistema
+*.db
+*.sqlite3
+*.log
+Thumbs.db
+.DS_Store

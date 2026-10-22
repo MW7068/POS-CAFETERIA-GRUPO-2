@@ -1,0 +1,46 @@
+name: Calidad y pruebas
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "chore/**"
+      - "docs/**"
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  calidad:
+    name: Ruff y Pytest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar herramientas
+        run: python -m pip install -r requirements.txt
+
+      - name: Verificar Ruff
+        run: python -m ruff check .
+
+      - name: Ejecutar Pytest
+        shell: bash
+        run: |
+          status=0
+          python -m pytest -v || status=$?
+          if [ "$status" -eq 5 ]; then
+            echo "::notice::Plantilla inicial sin pruebas. Backend debe incorporar los casos del PBI-01."
+            exit 0
+          fi
+          exit "$status"
