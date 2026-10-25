@@ -1,6 +1,9 @@
-"""Módulo reservado para la regla de negocio del PBI-01.
+def calcular_monto_final(monto_base: float, tipo_cliente: str) -> float:
+    """Calcula el monto final según el tipo de cliente."""
+    if monto_base < 0:
+        raise ValueError("El monto base no puede ser negativo")
 
-El Product Owner debe acordar los criterios de aceptación del PBI-01.
-Backend implementará después la primera prueba RED y el mínimo código GREEN.
-Este archivo no contiene todavía una funcionalidad del POS.
-"""
+    if tipo_cliente == "VIP":
+        return round(monto_base * 0.85, 2)
+
+    return round(monto_base, 2)
